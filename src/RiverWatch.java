@@ -13,6 +13,7 @@ public class RiverWatch {
 			Date dconn = new Date();
 			SimpleDateFormat dform = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
 			String date = dform.format(dconn);
+			String data = date +"," + level;
 			URL url = new URL(address + "?authcode=" + pass + "&data=" + data);
 			URLConnection request = url.openConnection();
 		} catch (MalformedURLException e) {
