@@ -4,8 +4,6 @@
 *.war
 *.ear
 
-<<<<<<< HEAD
-src/Password.class
-=======
+
 src/Password.java
->>>>>>> df707550987198912432b603fcd33647c84dc408
+
