@@ -4,4 +4,4 @@
 *.war
 *.ear
 
-src/Password.class
+src/Password.java
