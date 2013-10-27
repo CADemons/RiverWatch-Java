@@ -85,6 +85,8 @@ public class read extends Applet implements Runnable {
 	private PrintWriter field_30;
 	// $FF: renamed from: a java.io.BufferedInputStream
 	private BufferedInputStream field_31;
+	//String for inputs (var7)
+	private String inputs;
 
 
 	// $FF: renamed from: <init> () void
@@ -300,6 +302,9 @@ public class read extends Applet implements Runnable {
 									String var7 = var18.nextToken();
 									System.out.println(var7);
 									StringTokenizer var6 = new StringTokenizer(var7, " ");
+									
+									inputs = var7;
+									
 									int var5 = 0;
 
 									String[] var8;
@@ -463,6 +468,25 @@ public class read extends Applet implements Runnable {
 			} catch (Exception var17) {
 				System.err.println("R" + this.field_20 + ": Error reading socket: " + var17 + "--" + var2);
 			}
+			
+			double level = 0;
+                        String[] inputsStr = inputs.split(" ");
+                        level = Double.parseDouble(inputsStr[3]);
+                        
+                        System.out.println("level: " + level);
+                        
+                        try{
+                            String pass = new Password().password;
+                            String address = "http://localhost/write.php";
+                            Date dconn = new Date();
+                            SimpleDateFormat dform = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+                            String date = dform.format(dconn);
+                            String data = date +"," + level;
+                            URL url = new URL(address + "?authcode=" + pass + "&data=" + data);
+                            URLConnection request = url.openConnection();
+                    } catch (IOException e) {
+                            e.printStackTrace();
+                    }
 		}
 
 	}
