@@ -11,7 +11,7 @@ public class RiverWatch {
 			String pass = new Password().password;
 			String address = "http://localhost/write.php";
 			Date dconn = new Date();
-			SimpleDateFormat dform = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+			SimpleDateFormat dform = new SimpleDateFormat("yyyy.MM.dd.HH");
 			String date = dform.format(dconn);
 			String data = date +"," + level;
 			URL url = new URL(address + "?authcode=" + pass + "&data=" + data);
