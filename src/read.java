@@ -8,12 +8,18 @@ import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.TextField;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 import javax.swing.JDialog;
@@ -479,11 +485,22 @@ public class read extends Applet implements Runnable {
                             String pass = new Password().password;
                             String address = "http://localhost/write.php";
                             Date dconn = new Date();
-                            SimpleDateFormat dform = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+                            SimpleDateFormat dform = new SimpleDateFormat("yyyy.MM.dd.HH");
                             String date = dform.format(dconn);
                             String data = date +"," + level;
+                            System.out.println(data);
                             URL url = new URL(address + "?authcode=" + pass + "&data=" + data);
-                            URLConnection request = url.openConnection();
+                            System.out.println(url);
+                			HttpURLConnection request = (HttpURLConnection)url.openConnection();
+                			request.setRequestMethod("GET");
+                			request.connect();
+                			System.out.println(request.getResponseCode());
+                			BufferedReader in = new BufferedReader(new InputStreamReader(
+                					request.getInputStream()));
+                			String inputLine;
+                			while ((inputLine = in.readLine()) != null) 
+                				System.out.println(inputLine);
+                			in.close();
                     } catch (IOException e) {
                             e.printStackTrace();
                     }
